@@ -7,5 +7,6 @@
     <string name="start_button">Start a supportive conversation.</string>
     <string name="title_activity_guided">GuidedActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_survey">SurveyActivity</string>
 
 </resources>

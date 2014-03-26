@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MainActivity.this, GuidedActivity.class);
+				Intent i = new Intent(MainActivity.this, SurveyActivity.class);
 				startActivity(i);
 			}
 		});

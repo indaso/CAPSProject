@@ -26,6 +26,10 @@
             android:name="edu.upenn.capsproject.GuidedActivity"
             android:label="@string/title_activity_guided" >
         </activity>
+        <activity
+            android:name="edu.upenn.capsproject.SurveyActivity"
+            android:label="@string/title_activity_survey" >
+        </activity>
     </application>
 
 </manifest>
