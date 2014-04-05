@@ -6,11 +6,105 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".GuidedActivity" >
+    tools:context=".GuidedActivity"
+    tools:ignore="HardcodedText" >
 
-    <TextView
+    <Button
+        android:id="@+id/support_giver_button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignBaseline="@+id/support_giver_button2"
+        android:layout_alignBottom="@+id/support_giver_button2"
+        android:layout_alignRight="@+id/support_receiver_prompt"
+        android:text="Button2" />
+
+    <Button
+        android:id="@+id/support_receiver_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/support_receiver_button1"
+        android:layout_alignBottom="@+id/support_receiver_button1"
+        android:layout_alignRight="@+id/support_receiver_prompt"
+        android:text="Button1" />
+
+    <TextView
+        android:id="@+id/support_giver_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="This gives advice for the support giver!"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/support_receiver_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/support_giver_prompt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp"
+        android:text="This gives advice for the support receiver!"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/support_receiver_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/support_receiver_name"
+        android:layout_alignBottom="@+id/support_receiver_name"
+        android:layout_alignRight="@+id/support_receiver_button1"
+        android:text="Support Receiver:"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/support_giver_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/support_receiver_button1"
+        android:layout_below="@+id/support_giver_prompt"
+        android:layout_marginTop="40dp"
+        android:text="Button2" />
+
+    <TextView
+        android:id="@+id/support_receiver_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/support_receiver_button2"
+        android:layout_alignLeft="@+id/support_giver_name"
+        android:layout_marginBottom="32dp"
+        android:layout_marginLeft="28dp"
+        android:text="Albert Shu"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/support_receiver_button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/support_receiver_prompt"
+        android:layout_alignRight="@+id/support_giver_name"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="20dp"
+        android:text="Button1" />
+
+    <TextView
+        android:id="@+id/support_giver_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignRight="@+id/support_giver_prompt"
+        android:layout_marginRight="58dp"
+        android:text="Tony Xie"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/support_giver_button2"
+        android:layout_marginTop="43dp"
+        android:layout_toLeftOf="@+id/support_giver_name"
+        android:text="Support Giver:"
+        android:textSize="12sp" />
 
 </RelativeLayout>
