@@ -25,22 +25,32 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000f;
-        public static final int ask_name_giver=0x7f080001;
-        public static final int ask_name_receiver=0x7f080003;
-        public static final int enter_giver_name=0x7f080002;
-        public static final int enter_receiver_name=0x7f080004;
-        public static final int guided_conversation=0x7f08000e;
-        public static final int receiver_notification=0x7f080005;
-        public static final int recipient_feel_question=0x7f080008;
-        public static final int recipient_friendship_question=0x7f08000b;
-        public static final int recipient_talk_answer=0x7f080007;
-        public static final int recipient_talk_question=0x7f080006;
-        public static final int seekBar_feel=0x7f08000a;
-        public static final int seekBar_friend=0x7f08000d;
-        public static final int seekBar_friend_output=0x7f08000c;
-        public static final int seekbar_feel_output=0x7f080009;
-        public static final int start_button=0x7f080000;
+        public static final int action_settings=0x7f080019;
+        public static final int ask_name_giver=0x7f08000b;
+        public static final int ask_name_receiver=0x7f08000d;
+        public static final int enter_giver_name=0x7f08000c;
+        public static final int enter_receiver_name=0x7f08000e;
+        public static final int guided_conversation=0x7f080018;
+        public static final int receiver_notification=0x7f08000f;
+        public static final int recipient_feel_question=0x7f080012;
+        public static final int recipient_friendship_question=0x7f080015;
+        public static final int recipient_talk_answer=0x7f080011;
+        public static final int recipient_talk_question=0x7f080010;
+        public static final int seekBar_feel=0x7f080014;
+        public static final int seekBar_friend=0x7f080017;
+        public static final int seekBar_friend_output=0x7f080016;
+        public static final int seekbar_feel_output=0x7f080013;
+        public static final int start_button=0x7f08000a;
+        public static final int support_giver_button1=0x7f080000;
+        public static final int support_giver_button2=0x7f080001;
+        public static final int support_giver_name=0x7f080008;
+        public static final int support_giver_prompt=0x7f080005;
+        public static final int support_receiver_button1=0x7f080004;
+        public static final int support_receiver_button2=0x7f080003;
+        public static final int support_receiver_label=0x7f080006;
+        public static final int support_receiver_name=0x7f080007;
+        public static final int support_receiver_prompt=0x7f080002;
+        public static final int textView1=0x7f080009;
     }
     public static final class layout {
         public static final int activity_guided=0x7f030000;
