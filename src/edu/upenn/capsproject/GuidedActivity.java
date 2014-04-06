@@ -22,12 +22,15 @@ public class GuidedActivity extends Activity {
 	HashMap<Integer, conversationStage> prompts = new HashMap<Integer, conversationStage>();
 
 	// support giver and receiver names 
-	String receiverName = "Albert Shu";
-	String giverName = "Tony Xie";
+	String receiverName;
+	String giverName;
 
 	// keep track of buttons and prompts
 	Button supportReceiverButton1, supportReceiverButton2, supportGiverButton1, supportGiverButton2;
 	TextView supportReceiverPrompt, supportGiverPrompt;
+	
+	// string to return back to survey activity after guided activity is finished
+	public static final String GUIDED_FINISHED = "edu.upenn.capsproject.guided_finished";
 
 	// datatype to hold prompts, button texts, and what the next stage should be
 	class conversationStage{
@@ -62,6 +65,8 @@ public class GuidedActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		giverName = getIntent().getStringExtra(SurveyActivity.PROVIDER_NAME);
+		receiverName = getIntent().getStringExtra(SurveyActivity.RECIPIENT_NAME);
 		// create all the stages of the conversation
 		conversationStage stage1 = new conversationStage("What's on your mind?", "Listen", "Done", 2, "", 0, "", 0, "", 0);
 		prompts.put(1, stage1);
@@ -132,9 +137,7 @@ public class GuidedActivity extends Activity {
 		supportReceiverButton2 = (Button)findViewById(R.id.support_receiver_button2);
 		supportReceiverButton2.setRotation(180);
 		supportReceiverButton2.setVisibility(View.INVISIBLE);
-		
-		findViewById(R.id.support_receiver_label).setRotation(180);
-		
+				
 		TextView supportReceiverName = (TextView) findViewById(R.id.support_receiver_name);
 		supportReceiverName.setRotation(180);
 		supportReceiverName.setText(receiverName);
@@ -218,7 +221,8 @@ public class GuidedActivity extends Activity {
 	public boolean checkIfEndStage(int myStage){
 		if (myStage == ENDSTAGE){
 			Intent i = new Intent(GuidedActivity.this, SurveyActivity.class);
-			startActivity(i);
+			i.putExtra(GUIDED_FINISHED, true);
+			setResult(RESULT_OK, i);
 			finish();
 			return false;
 		}

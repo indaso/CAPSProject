@@ -1,5 +1,9 @@
 package edu.upenn.capsproject;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -8,6 +12,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -249,7 +255,34 @@ public class SurveyActivity extends Activity {
 	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// name will be from GuidedActivity string similar to recipient name
-		// showBeforeViews = data.getBooleanExtra(name, true);
+		 showBeforeViews = data.getBooleanExtra(GuidedActivity.GUIDED_FINISHED, true);
+	}
+	
+	protected void onDestroy() {
+		super.onDestroy();
+		Log.d("destroy method", "got called");
+		try {
+			Logger.createLogger(getFilesDir());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		final String mFormatString = "EEEE, MMMMM d, yyyy";
+		Date d = new Date();
+		String[] info1 = {DateFormat.format(mFormatString, d).toString(),
+				support_recipient, String.valueOf(bFeelRating), 
+				String.valueOf(aFeelRating), String.valueOf(bFriendshipRating),
+				String.valueOf(aFriendshipRating)};
+		ArrayList<String[]> s1 = new ArrayList<String[]>();
+		s1.add(info1);
+		try {
+			Logger.getLogger().write(s1);
+			Logger.getLogger().close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
