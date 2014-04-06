@@ -22,13 +22,13 @@ public class MainActivity extends Activity {
 		actionBar = getActionBar();
 		actionBar.hide();
 		setContentView(R.layout.activity_main);
-		
+
 		//get resource ID of button
 		mStartButton = (Button)findViewById(R.id.start_button);
-		
+
 		//listener for button click
 		mStartButton.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -36,8 +36,8 @@ public class MainActivity extends Activity {
 				startActivity(i);
 			}
 		});
-		
-		
+
+
 	}
 
 	@Override
