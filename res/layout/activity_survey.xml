@@ -10,111 +10,129 @@
     tools:context=".SurveyActivity" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <TextView
             android:id="@+id/survey_type"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/ask_name_giver"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/support_name_giver" />
-    
-    <EditText
-        android:id="@+id/enter_giver_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/giver_name_hint" >
-        
-        <requestFocus />
-    </EditText>
-
-
-    
-    <TextView
-        android:layout_marginTop="20dp"
-        android:id="@+id/ask_name_receiver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/support_name_receiver" />
-    
-    <EditText
-        android:id="@+id/enter_receiver_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/receiver_name_hint" />
-
-    <TextView
-        android:id="@+id/receiver_notification"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    
-    <TextView
-        android:id="@+id/recipient_talk_question"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/recipient_talk_answer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine" />
-        
-    <TextView
-        android:id="@+id/recipient_feel_question"
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/seekbar_feel_output"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <SeekBar
-        android:id="@+id/seekBar_feel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/recipient_friendship_question"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/seekBar_friend_output"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <SeekBar
-        android:id="@+id/seekBar_friend"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/guided_conversation"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start_conversation" />
+	    <TextView
+	        android:id="@+id/ask_name_giver"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/support_name_giver" />
+	    
+	    <EditText
+	        android:id="@+id/enter_giver_name"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="textPersonName"
+	        android:hint="@string/giver_name_hint" >
+	        
+	        <requestFocus />
+	    </EditText>
+	
+	
+	    
+	    <TextView
+	        android:layout_marginTop="20dp"
+	        android:id="@+id/ask_name_receiver"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/support_name_receiver" />
+	    
+	    <EditText
+	        android:id="@+id/enter_receiver_name"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="textPersonName"
+	        android:hint="@string/receiver_name_hint" />
+	
+	    <TextView
+	        android:id="@+id/receiver_notification"
+	        android:layout_marginTop="10dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	    
+	    <TextView
+	        android:id="@+id/recipient_talk_question"
+	        android:layout_marginTop="10dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	
+	    <EditText
+	        android:id="@+id/recipient_talk_answer"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:inputType="textMultiLine" />
+	        
+	    <TextView
+	        android:id="@+id/recipient_feel_question"
+	        android:layout_marginTop="30dp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	
+	    <TextView
+	        android:layout_marginTop="10dp"
+	        android:id="@+id/seekbar_feel_output"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
+	
+	    <SeekBar
+	        android:id="@+id/seekBar_feel"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	
+	    <TextView
+	        android:layout_marginTop="10dp"
+	        android:id="@+id/recipient_friendship_question"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	
+	    <TextView
+	        android:layout_marginTop="10dp"
+	        android:id="@+id/seekBar_friend_output"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
+	
+	    <SeekBar
+	        android:id="@+id/seekBar_friend"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	    
+	    <TextView
+	        android:layout_marginTop="10dp"
+	        android:id="@+id/recipient_support_question"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	
+	    <TextView
+	        android:layout_marginTop="10dp"
+	        android:id="@+id/seekBar_support_output"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
+	
+	    <SeekBar
+	        android:id="@+id/seekBar_support"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
+	
+	    <Button
+	        android:id="@+id/guided_conversation"
+	        android:layout_marginTop="10dp"
+	        android:layout_gravity="center"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/start_conversation" />
     </LinearLayout>
 
 </ScrollView>
