@@ -69,10 +69,15 @@ public class SurveyActivity extends Activity {
 
 	// Hide actionBar
 	protected ActionBar actionBar;
-	
+
 	// Timestamps
-	Date dBefore;
-	Date dAfter;
+	protected Date dBefore;
+	protected Date dAfter;
+
+	protected String sTimeBefore;
+	protected String sTimeAfter = "";
+
+	protected String mFormatString = "yyyy-MM-dd hh:mm:ss";
 
 	// Strings to pass in extras for the guided activity
 	public static final String RECIPIENT_NAME = "edu.upenn.capsproject.recipient_name";
@@ -92,11 +97,10 @@ public class SurveyActivity extends Activity {
 		actionBar.hide();
 		setContentView(R.layout.activity_survey);
 		dBefore = new Date();
+		sTimeBefore = DateFormat.format(mFormatString, dBefore).toString();
 		recipientSupport = (TextView) findViewById(R.id.recipient_support_question);
-		
 
 		recipientSupport.setVisibility(View.GONE);
-
 
 		mProviderEText = (EditText) findViewById(R.id.enter_giver_name);
 		mRecipientEText = (EditText) findViewById(R.id.enter_receiver_name);
@@ -104,11 +108,13 @@ public class SurveyActivity extends Activity {
 		mProviderEText.addTextChangedListener(new TextWatcher() {
 
 			@Override
-			public void afterTextChanged(Editable s) {}
+			public void afterTextChanged(Editable s) {
+			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {}
+					int after) {
+			}
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
@@ -146,7 +152,8 @@ public class SurveyActivity extends Activity {
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {}
+					int after) {
+			}
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
@@ -163,25 +170,28 @@ public class SurveyActivity extends Activity {
 		seekBarFeelView = (TextView) findViewById(R.id.seekbar_feel_output);
 		seekBarFriendView = (TextView) findViewById(R.id.seekBar_friend_output);
 		seekBarSupportView = (TextView) findViewById(R.id.seekBar_support_output);
-		
-		seekBarSupport.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-				aSupportRating = progress;
-				String sSupport = String.valueOf(aSupportRating);
-				seekBarSupportView.setText("Support Rating: " + sSupport);
-			}
+		seekBarSupport
+				.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {}
+					@Override
+					public void onProgressChanged(SeekBar seekBar,
+							int progress, boolean fromUser) {
+						aSupportRating = progress;
+						String sSupport = String.valueOf(aSupportRating);
+						seekBarSupportView.setText("Support Rating: "
+								+ sSupport);
+					}
 
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {}
-			
-		});
-		
+					@Override
+					public void onStartTrackingTouch(SeekBar seekBar) {
+					}
+
+					@Override
+					public void onStopTrackingTouch(SeekBar seekBar) {
+					}
+
+				});
 
 		seekBarFeel.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
@@ -201,10 +211,12 @@ public class SurveyActivity extends Activity {
 			}
 
 			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {}
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
 
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {}
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
 
 		});
 
@@ -226,10 +238,12 @@ public class SurveyActivity extends Activity {
 			}
 
 			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {}
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
 
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {}
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
 
 		});
 
@@ -238,11 +252,13 @@ public class SurveyActivity extends Activity {
 		topic.addTextChangedListener(new TextWatcher() {
 
 			@Override
-			public void afterTextChanged(Editable s) {}
+			public void afterTextChanged(Editable s) {
+			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {}
+					int after) {
+			}
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
@@ -269,7 +285,7 @@ public class SurveyActivity extends Activity {
 
 		surveyType = (TextView) findViewById(R.id.survey_type);
 		surveyType.setText("Pre Survey");
-		
+
 		seekBarSupportView.setVisibility(View.GONE);
 		seekBarSupport.setVisibility(View.GONE);
 
@@ -289,41 +305,43 @@ public class SurveyActivity extends Activity {
 				finish();
 			}
 		});
-		
+
 		topic.setVisibility(View.GONE);
 		mProviderEText.setVisibility(View.GONE);
 		mRecipientEText.setVisibility(View.GONE);
 		recipientNotification.setVisibility(View.GONE);
 		recipientAskTopic.setVisibility(View.GONE);
-		
+
 		askProviderName = (TextView) findViewById(R.id.ask_name_giver);
 		askRecipientName = (TextView) findViewById(R.id.ask_name_receiver);
 		askProviderName.setVisibility(View.GONE);
 		askRecipientName.setVisibility(View.GONE);
-		
-		recipientSupport.setText("How good or bad was the support you received from " +
-		support_recipient +" during this conversation?\n" + 
-				"(Very Bad to Very Good)");
+
+		recipientSupport
+				.setText("How good or bad was the support you received from "
+						+ support_recipient + " during this conversation?\n"
+						+ "(Very Bad to Very Good)");
 		recipientSupport.setVisibility(View.VISIBLE);
 		seekBarSupport.setVisibility(View.VISIBLE);
 		seekBarSupportView.setVisibility(View.VISIBLE);
-		
-		
-	}
 
+		// Formatted date string
+		sTimeAfter = DateFormat.format(mFormatString, dAfter).toString();
+
+	}
+	
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		Log.d("onDestroy", "got called");
 		try {
 			Logger.createLogger(getFilesDir());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String mFormatString = "yyyy-MM-dd hh:mm:ss";
-		Log.d("onDestroy", DateFormat.format(mFormatString, dBefore).toString());
-		Log.d("onDestroy", DateFormat.format(mFormatString, dAfter).toString());
-		String[] info1 = { support_recipient, DateFormat.format(mFormatString, dBefore).toString(),
-				 topicText, String.valueOf(bFeelRating), DateFormat.format(mFormatString, dAfter).toString(),
+		Log.d("onDestroy", sTimeBefore);
+		Log.d("onDestroy", sTimeAfter);
+		String[] info1 = { support_recipient, sTimeBefore, topicText,
+				String.valueOf(bFeelRating), sTimeAfter,
 				String.valueOf(aFeelRating), String.valueOf(bFriendshipRating),
 				String.valueOf(aFriendshipRating) };
 		ArrayList<String[]> s1 = new ArrayList<String[]>();
