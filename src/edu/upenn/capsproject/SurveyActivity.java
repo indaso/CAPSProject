@@ -1,5 +1,7 @@
 package edu.upenn.capsproject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +10,7 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +24,8 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+
+import com.github.sendgrid.SendGrid;
 
 public class SurveyActivity extends Activity {
 	// before survey slider ratings
@@ -291,6 +296,7 @@ public class SurveyActivity extends Activity {
 
 	}
 
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// name will be from GuidedActivity string similar to recipient name
 		showBeforeViews = data.getBooleanExtra(GuidedActivity.GUIDED_FINISHED,
@@ -329,12 +335,12 @@ public class SurveyActivity extends Activity {
 		sTimeAfter = DateFormat.format(mFormatString, dAfter).toString();
 
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		try {
-			Logger.createLogger(getFilesDir());
+			Logger.createLogger(new File(getFilesDir(), "data.csv"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -353,6 +359,34 @@ public class SurveyActivity extends Activity {
 			e.printStackTrace();
 		}
 
+		try {
+			File data = new File(getFilesDir(), "data.csv");
+			new SendEmailWithSendGrid().execute(data);
+
+		} catch (Exception e) {
+			Log.d("onDestroy", "email failed");
+			e.printStackTrace();
+		}
+
+	}
+
+	private class SendEmailWithSendGrid extends AsyncTask<File, Void, String> {
+
+		@Override
+		protected String doInBackground(File... params) {
+			SendGrid sendgrid = new SendGrid("app19013461@heroku.com", "d1buyrvv");
+			sendgrid.addTo("fanyin1234@gmail.com");
+			sendgrid.setFrom("fanyin1234@gmail.com");
+			sendgrid.setSubject("Conversation Data");
+			sendgrid.setText("");
+			try {
+				sendgrid.addFile(params[0]);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			String response = sendgrid.send();
+			return response;
+		}
 	}
 
 	@Override

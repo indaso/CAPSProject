@@ -12,13 +12,11 @@ public class Logger {
 
 	private final CSVWriter writer;
 	private Logger (File file) throws IOException{
-		writer = new CSVWriter(new FileWriter(new File(file, "data.csv")));
+		writer = new CSVWriter(new FileWriter(file));
 	}
 
 	public static void createLogger(File file) throws IOException{
-		if (log == null){
-			log = new Logger(file);
-		}
+		log = new Logger(file);
 	}
 
 	public static Logger getLogger() throws Exception{
