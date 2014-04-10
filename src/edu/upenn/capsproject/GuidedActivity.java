@@ -100,7 +100,7 @@ public class GuidedActivity extends Activity {
 		prompts.put(14, stage14);
 		conversationStage stage15 = new conversationStage("Answer " + giverName + "'s question", "Listen", "Done", 16, "", 0, "", 0, "", 0);
 		prompts.put(15, stage15);		
-		conversationStage stage16 = new conversationStage("", "What did " + receiverName + " say?", "", 0, "", 0, "Yes", 17 , "No", 14);
+		conversationStage stage16 = new conversationStage("", "What did " + receiverName + " say help?", "", 0, "", 0, "Yes", 17 , "No", 14);
 		prompts.put(16, stage16);
 		conversationStage stage17 = new conversationStage("Listen", "Say 'I realize I don't know everything about your situation, so tell me if what I say makes no sense to you.", "", 0, "", 0, "Done", 18, "", 0);
 		prompts.put(17, stage17);
