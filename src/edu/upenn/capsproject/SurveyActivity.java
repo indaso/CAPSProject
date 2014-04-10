@@ -362,8 +362,8 @@ public class SurveyActivity extends Activity {
 		}
 
 		try {
-			File data = new File(getFilesDir(), "data.csv");
-			new SendEmailWithSendGrid().execute(data);
+			String to = "salbert@sas.upenn.edu";
+			new SendEmailWithSendGrid().execute(to);
 
 		} catch (Exception e) {
 			Log.d("onDestroy", "email failed");
@@ -371,17 +371,17 @@ public class SurveyActivity extends Activity {
 		}
 	}
 
-	private class SendEmailWithSendGrid extends AsyncTask<File, Void, String> {
+	private class SendEmailWithSendGrid extends AsyncTask<String, Void, String> {
 
 		@Override
-		protected String doInBackground(File... params) {
+		protected String doInBackground(String... params) {
 			SendGrid sendgrid = new SendGrid("app19013461@heroku.com", "d1buyrvv");
-			sendgrid.addTo("fanyin1234@gmail.com");
-			sendgrid.setFrom("fanyin1234@gmail.com");
+			sendgrid.addTo(params[0]);
+			sendgrid.setFrom(params[0]);
 			sendgrid.setSubject("Conversation Data");
-			sendgrid.setText("");
+			sendgrid.setText("CSV File for conversation");
 			try {
-				sendgrid.addFile(params[0]);
+				sendgrid.addFile(new File(getFilesDir(), "data.csv"));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
