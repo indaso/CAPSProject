@@ -293,41 +293,43 @@ public class SurveyActivity extends Activity {
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// name will be from GuidedActivity string similar to recipient name
-		showBeforeViews = data.getBooleanExtra(GuidedActivity.GUIDED_FINISHED,
-				true);
-		dAfter = new Date();
-		surveyType.setText("Post Survey");
-		startConversation.setText("End Conversation");
-		startConversation.setOnClickListener(new View.OnClickListener() {
+		if (resultCode == RESULT_OK) {
+			showBeforeViews = data.getBooleanExtra(
+					GuidedActivity.GUIDED_FINISHED, true);
+			dAfter = new Date();
+			surveyType.setText("Post Survey");
+			startConversation.setText("End Conversation");
+			startConversation.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
 
-		topic.setVisibility(View.GONE);
-		mProviderEText.setVisibility(View.GONE);
-		mRecipientEText.setVisibility(View.GONE);
-		recipientNotification.setVisibility(View.GONE);
-		recipientAskTopic.setVisibility(View.GONE);
+			topic.setVisibility(View.GONE);
+			mProviderEText.setVisibility(View.GONE);
+			mRecipientEText.setVisibility(View.GONE);
+			recipientNotification.setVisibility(View.GONE);
+			recipientAskTopic.setVisibility(View.GONE);
 
-		askProviderName = (TextView) findViewById(R.id.ask_name_giver);
-		askRecipientName = (TextView) findViewById(R.id.ask_name_receiver);
-		askProviderName.setVisibility(View.GONE);
-		askRecipientName.setVisibility(View.GONE);
+			askProviderName = (TextView) findViewById(R.id.ask_name_giver);
+			askRecipientName = (TextView) findViewById(R.id.ask_name_receiver);
+			askProviderName.setVisibility(View.GONE);
+			askRecipientName.setVisibility(View.GONE);
 
-		recipientSupport
-				.setText("How good or bad was the support you received from "
-						+ support_recipient + " during this conversation?\n"
-						+ "(Very Bad to Very Good)");
-		recipientSupport.setVisibility(View.VISIBLE);
-		seekBarSupport.setVisibility(View.VISIBLE);
-		seekBarSupportView.setVisibility(View.VISIBLE);
+			recipientSupport
+					.setText("How good or bad was the support you received from "
+							+ support_recipient
+							+ " during this conversation?\n"
+							+ "(Very Bad to Very Good)");
+			recipientSupport.setVisibility(View.VISIBLE);
+			seekBarSupport.setVisibility(View.VISIBLE);
+			seekBarSupportView.setVisibility(View.VISIBLE);
 
-		// Formatted date string
-		sTimeAfter = DateFormat.format(mFormatString, dAfter).toString();
-
+			// Formatted date string
+			sTimeAfter = DateFormat.format(mFormatString, dAfter).toString();
+		}
 	}
 	
 	@Override
