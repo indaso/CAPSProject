@@ -44,5 +44,11 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	// Quit game
+    public void onQuitButtonClick(View v) {
+        finish();
+        System.exit(0);
+    }
 
 }
