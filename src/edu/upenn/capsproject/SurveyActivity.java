@@ -62,7 +62,7 @@ public class SurveyActivity extends Activity {
 	protected SeekBar seekBarSupport;
 
 	// TextViews for ratings
-	protected TextView seekBarFeelView;
+	protected TextView seekBarFeelView2;
 	protected TextView seekBarFriendView;
 	protected TextView seekBarSupportView;
 
@@ -172,7 +172,7 @@ public class SurveyActivity extends Activity {
 		seekBarFeel = (SeekBar) findViewById(R.id.seekBar_feel);
 		seekBarFriend = (SeekBar) findViewById(R.id.seekBar_friend);
 		seekBarSupport = (SeekBar) findViewById(R.id.seekBar_support);
-		seekBarFeelView = (TextView) findViewById(R.id.seekbar_feel_output);
+		seekBarFeelView2 = (TextView) findViewById(R.id.seekbar_feel_output);
 		seekBarFriendView = (TextView) findViewById(R.id.seekBar_friend_output);
 		seekBarSupportView = (TextView) findViewById(R.id.seekBar_support_output);
 
@@ -184,8 +184,7 @@ public class SurveyActivity extends Activity {
 							int progress, boolean fromUser) {
 						aSupportRating = progress;
 						String sSupport = String.valueOf(aSupportRating);
-						seekBarSupportView.setText("Support Rating: "
-								+ sSupport);
+						seekBarSupportView.setText("Very Bad                      Neutral                      Very Good");
 					}
 
 					@Override
@@ -205,12 +204,14 @@ public class SurveyActivity extends Activity {
 					boolean fromUser) {
 				if (showBeforeViews) {
 					bFeelRating = progress;
-					String sFeel = String.valueOf(bFeelRating);
-					seekBarFeelView.setText("Feeling rating: " + sFeel);
+					// albert String sFeel = String.valueOf(bFeelRating);
+					// albert seekBarFeelView.setText("Feeling rating: " + sFeel);
+					seekBarFeelView2.setText("Very Bad                      Neutral                      Very Good");
 				} else {
 					aFeelRating = progress;
-					String sFeel = String.valueOf(aFeelRating);
-					seekBarFeelView.setText("Feeling rating: " + sFeel);
+					// albert String sFeel = String.valueOf(aFeelRating);
+					// albert seekBarFeelView.setText("Feeling rating: " + sFeel);
+                    seekBarFeelView2.setText("Very Bad                      Neutral                      Very Good");
 				}
 
 			}
@@ -239,7 +240,8 @@ public class SurveyActivity extends Activity {
 					sFriend = String.valueOf(aFriendshipRating);
 				}
 
-				seekBarFriendView.setText("Friendship Rating: " + sFriend);
+				// albert seekBarFriendView.setText("Friendship Rating: " + sFriend);
+				seekBarFriendView.setText("Not Close                    Neutral                    Very Close");
 			}
 
 			@Override
