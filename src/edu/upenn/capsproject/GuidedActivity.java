@@ -1,13 +1,27 @@
 package edu.upenn.capsproject;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
+
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -76,6 +90,27 @@ public class GuidedActivity extends Activity {
 			createConversationFromCsv();
 		} catch (IOException e) {
 			System.out.println("could not read conversations from csv");
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		String FILENAME = "script.csv";
+
+		FileInputStream fis = null;
+		try {
+			fis = openFileInput(FILENAME);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		InputStreamReader isr = new InputStreamReader(fis);
+		   BufferedReader bufferedReader = new BufferedReader(isr);
+		   String line;
+		   try {
+			while ((line = bufferedReader.readLine()) != null) {
+			       System.out.println("reading from file... " + line);
+			   }
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -183,56 +218,107 @@ public class GuidedActivity extends Activity {
 	}
 	
 	// create the conversation stages from the csv 
-	public void createConversationFromCsv() throws IOException{
-		InputStream inputStream = getResources().openRawResource(R.raw.script);
-		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-		String line;
-		while ((line = reader.readLine()) != null) {
-			
-			// do not skip empty csv values 
-			String[] values = line.split(",", -1);
-			int stageLevel = Integer.parseInt(values[0]);
-			
-			// the last stage should be the stage at which the conversation ends
-			endstage = stageLevel;
-			
-			// replace [support provider] place holder with actual name
-			String receiverTemp1 = values[1];
-			String receiverTemp2 = receiverTemp1.replace("[support provider]", giverName);
-			String receiverPrompt = receiverTemp2.replace("[support recipient]", receiverName);
-			
-			String receiverButton1Text = values[2];
-			int receiverButton1Dst = 1;
-			if (!(values[3]).trim().equals("")){
-				receiverButton1Dst = Integer.parseInt(values[3]);
-			} 
-			String receiverButton2Text = values[4];
-			int receiverButton2Dst = 1; 
-			if (!(values[5]).trim().equals("")){
-				System.out.println("value[5] is " + values[5]);
-				receiverButton2Dst = Integer.parseInt(values[5]);
+	public void createConversationFromCsv() throws IOException, InterruptedException{
+		if (isOnline()){
+		Thread thread = new Thread(new Runnable(){
+		    @Override
+		    public void run() {
+		        try {
+		        	HttpClient httpClient = new DefaultHttpClient();
+		            HttpContext localContext = new BasicHttpContext();
+		            String uri = "https://capsscriptfiles.s3.amazonaws.com/uploads/script.csv";
+		            HttpGet httpGet = new HttpGet(uri);
+		            HttpResponse response = httpClient.execute(httpGet, localContext);
+//		    		InputStream inputStream = getResources().openRawResource(R.raw.script);
+		    		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+		    		String line;
+		    		
+		    		// write to internal storage 
+		    		String FILENAME = "script.csv";
+		    		String stringToWrite = "";
+		    		deleteFile(FILENAME);
+		    		FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+		    		while ((line = reader.readLine()) != null) {
+		    			parseConversationStageFromLine(line);
+		    			stringToWrite = line + "\n";
+			    		fos.write(stringToWrite.getBytes());
+		    		}
+		    		fos.close();
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		    }
+		});
+		thread.start();
+		thread.join();
+		} else {
+			// if not online look in the local file
+			String FILENAME = "script.csv";
+			FileInputStream fis = null;
+			try {
+				fis = openFileInput(FILENAME);
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
 			}
-			String giverTemp1 = values[6];
-			String giverTemp2 = giverTemp1.replace("[support provider]", giverName);
-			String giverPrompt = giverTemp2.replace("[support recipient]", receiverName);
-			
-			String giverButton1Text = values[7];
-			int giverButton1Dst = 1;
-			if (!(values[8]).trim().equals("")){
-				giverButton1Dst = Integer.parseInt(values[8]);
+			InputStreamReader isr = new InputStreamReader(fis);
+			   BufferedReader bufferedReader = new BufferedReader(isr);
+			   String line;
+			   try {
+				while ((line = bufferedReader.readLine()) != null) {
+				       parseConversationStageFromLine(line);
+				   }
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			String giverButton2Text = values[9];
-			int giverButton2Dst = 1;
-			if (!(values[10]).trim().equals("")){
-				giverButton2Dst = Integer.parseInt(values[10]);
-			}
-			
-			// construct the conversation stage 
-			conversationStage myConvo = new conversationStage(receiverPrompt, giverPrompt, receiverButton1Text, receiverButton1Dst,
-																receiverButton2Text, receiverButton2Dst, giverButton1Text, 
-																giverButton1Dst, giverButton2Text, giverButton2Dst);
-			prompts.put(stageLevel, myConvo);
 		}
+		
+	}
+	
+	public void parseConversationStageFromLine(String line){
+		System.out.println(line);
+		// do not skip empty csv values 
+		String[] values = line.split(",", -1);
+		int stageLevel = Integer.parseInt(values[0]);
+		
+		// the last stage should be the stage at which the conversation ends
+		endstage = stageLevel;
+		
+		// replace [support provider] place holder with actual name
+		String receiverTemp1 = values[1];
+		String receiverTemp2 = receiverTemp1.replace("[support provider]", giverName);
+		String receiverPrompt = receiverTemp2.replace("[support recipient]", receiverName);
+		
+		String receiverButton1Text = values[2];
+		int receiverButton1Dst = 1;
+		if (!(values[3]).trim().equals("")){
+			receiverButton1Dst = Integer.parseInt(values[3]);
+		} 
+		String receiverButton2Text = values[4];
+		int receiverButton2Dst = 1; 
+		if (!(values[5]).trim().equals("")){
+			System.out.println("value[5] is " + values[5]);
+			receiverButton2Dst = Integer.parseInt(values[5]);
+		}
+		String giverTemp1 = values[6];
+		String giverTemp2 = giverTemp1.replace("[support provider]", giverName);
+		String giverPrompt = giverTemp2.replace("[support recipient]", receiverName);
+		
+		String giverButton1Text = values[7];
+		int giverButton1Dst = 1;
+		if (!(values[8]).trim().equals("")){
+			giverButton1Dst = Integer.parseInt(values[8]);
+		}
+		String giverButton2Text = values[9];
+		int giverButton2Dst = 1;
+		if (!(values[10]).trim().equals("")){
+			giverButton2Dst = Integer.parseInt(values[10]);
+		}
+		
+		// construct the conversation stage 
+		conversationStage myConvo = new conversationStage(receiverPrompt, giverPrompt, receiverButton1Text, receiverButton1Dst,
+															receiverButton2Text, receiverButton2Dst, giverButton1Text, 
+															giverButton1Dst, giverButton2Text, giverButton2Dst);
+		prompts.put(stageLevel, myConvo);
 	}
 	
     // method for switching between the conversation stages 
@@ -268,6 +354,16 @@ public class GuidedActivity extends Activity {
 			} else {
 				supportGiverButton2.setVisibility(View.INVISIBLE);
 			}
+	}
+	
+	public boolean isOnline() {
+	    ConnectivityManager cm =
+	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+	        return true;
+	    }
+	    return false;
 	}
 
 	@Override
