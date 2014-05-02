@@ -309,14 +309,13 @@ public class SurveyActivity extends Activity {
         }
         Log.d("onDestroy", sTimeBefore);
         Log.d("onDestroy", sTimeAfter);
-        String[] headers = { "Recipient", "Start Time", "Topic",
+        String[] headers = { "Recipient", "Topic", "Start Time", "End Time",
                 "Feeling Before", "Friendship Before",
-                "End Time", "Feeling After",
-                "Friendship After" };
-        String[] info1 = { supportRecipient, sTimeBefore, topicText,
+                "Feeling After", "Friendship After", "Support Rating"};
+        String[] info1 = { supportRecipient, topicText, sTimeBefore, sTimeAfter,
                 String.valueOf(bFeelRating), String.valueOf(bFriendshipRating),
-                sTimeAfter, String.valueOf(aFeelRating),
-                String.valueOf(aFriendshipRating) };
+                String.valueOf(aFeelRating), String.valueOf(aFriendshipRating),
+                String.valueOf(aSupportRating) };
         ArrayList<String[]> s1 = new ArrayList<String[]>();
         s1.add(headers);
         s1.add(info1);
