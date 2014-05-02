@@ -1,25 +1,1 @@
-1,Tell [support provider] what's on your mind. Take your time and speak for as long as you like.,Done,2, , ,Listen,,,,
-2,,,,,,Did you understand what [support recipient] said?,Yes,4,No,3
-3,Listen.,,,,,Ask about the detail you did not understand (do not give advice yet).,Done,5,,
-4,Listen.,,,,,Tell [support recipient] what you heard - just say it back.,Done,6,,
-5,Answer [support provider]'s question.,Done,2,,,Listen.,,,,
-6,Did [support provider] understand you?,Yes,8,No,7,,,,,
-7,Explain what [support provider] did not understand.,Done,2,,,Listen.,,,,
-8,Do you have more to share?,Yes,1,No,9,Good work - you listened well. Wait for [support recipient].,,,,
-9,Listen.,,,,,Briefly summarize everything [support recipient] talked about during this conversation.,Done,10,,
-10,Did [support provider] understand you?,Yes,11,No,7,,,,,
-11,,,,,,Do you have advice an opinion or a story to share?,Yes,12,No,13
-12,Listen.,,,,,Ask [support recipient] if it's okay for you to share your advice/opinion/story. What did [support recipient] say?,Yes,14,No,13
-13,,,,,,Would you like to offer reassurance or let [support recipient] know that you care?,Yes,19,No,22
-14,Listen.,,,,,"Say ""I realize I don't know everything about your situation so tell me if what I say makes no sense to you.""",Done,15,,
-15,Listen.,,,,,Share your advice / opinion / story.,Done,14,,
-16,How helpful is what [support provider] said?,Helpful,17,Not Helpful,18,,,,,
-17,Explain to [support recipient] why you feel this way.,Done,11,,,Listen.,,,,
-18,Explain to [support recipient] why you feel this way.,Done,4,,,Listen.,,,,
-19,Listen.,,,,,Offer reassurance or let [support recipient] know that you care?,Done,20,,
-20,Listen.,,,,,Thank [support recipient] for sharing.,Done,21,,
-21,Thank [support provider] for listening to you and offering support.,Done,25,,,Listen.,,,,
-22,,,,,,Would you like to offer to help [support recipient] now or in the future?,Yes,23,No,20
-23,Listen.,,,,,"Ask: ""How can I help now or in the future?""",Done,24,,
-24,Answer [support provider]'s question.,Done,20,,,Listen.,,,,
-25,,,,,,END OF CONVERSATION: GO TO AFTER-CONVERSATION QUESTIONNAIRE,,,,
+1,Tell [support provider] he's awesome!!!!!!,Done,2, , ,Listen,,,,2,,,,,,Did you understand what [support recipient] said?,Yes,4,No,33,Listen. New script 1215,,,,,Ask about the detail you did not understand (do not give advice yet).,Done,5,,4,Listen.,,,,,Tell [support recipient] what you heard - just say it back.,Done,6,,5,Answer [support provider]'s question lolz.,Done,2,,,Listen.,,,,6,Did [support provider] understand you?,Yes,8,No,7,,,,,7,Explain what [support provider] did not understand.,Done,2,,,Listen.,,,,8,Do you have more to share?,Yes,1,No,9,Good work - you listened well. Wait for [support recipient].,,,,9,Listen.,,,,,Briefly summarize everything [support recipient] talked about during this conversation.,Done,10,,10,Did [support provider] understand you?,Yes,11,No,7,,,,,11,,,,,,Do you have positive an opinion or a story to share?,Yes,12,No,1312,Listen.,,,,,Ask [support recipient] if it's okay for you to share your advice/opinion/story. What did [support recipient] say?,Yes,14,No,1313,,,,,,Would you like to offer reassurance or let [support recipient] know that you care?,Yes,19,No,2214,Listen.,,,,,"Say ""I realize I don't know everything about your situation so tell me if what I say makes no sense to you.""",Done,15,,15,Listen.,,,,,Share your advice / opinion / story.,Done,14,,16,How helpful is what [support provider] said?,Helpful,17,Not Helpful,18,,,,,17,Explain to [support recipient] why you feel this way.,Done,11,,,Listen.,,,,18,Explain to [support recipient] why you feel this way.,Done,4,,,Listen.,,,,19,Listen.,,,,,Offer life or let [support recipient] know that you care?,Done,20,,20,Listen.,,,,,Thank [support recipient] for sharing.,Done,21,,21,Thank [support provider] for listening to you and offering support.,Done,25,,,Listen.,,,,22,,,,,,Would you like to chicken to help [support recipient] now or in the future?,Yes,23,No,2023,Listen.,,,,,"Ask: ""How can I help now or in the future?""",Done,24,,24,Answer [support provider]'s question.,Done,20,,,Listen.,,,,25,,,,,,END OF CONVERSATION: GO TO AFTER-CONVERSATION QUESTIONNAIRE,,,,

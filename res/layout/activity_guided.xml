@@ -23,14 +23,6 @@
         android:gravity="center|center_horizontal"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/support_receiver_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Albert Shu"
-            android:textSize="12sp" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,10 +45,20 @@
             android:id="@+id/support_receiver_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="This gives advice for the support receiver!"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/support_receiver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="100dp"
+            android:text="Albert Shu"
+            android:textSize="12sp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -67,10 +69,19 @@
         android:orientation="vertical" >
 
         <TextView
+            android:id="@+id/support_giver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
+            android:layout_marginRight="100dp"
+            android:text="Tony Xie"
+            android:textSize="12sp" />
+
+        <TextView
             android:id="@+id/support_giver_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="This gives advice for the support giver!"
             android:textSize="20sp" />
@@ -94,13 +105,6 @@
                 android:text="Button2" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/support_giver_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Tony Xie"
-            android:textSize="12sp" />
     </LinearLayout>
 
 </LinearLayout>
