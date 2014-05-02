@@ -283,7 +283,6 @@ public class SurveyActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     finish();
-                    System.exit(0);
                 }
             });
 
