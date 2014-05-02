@@ -1,6 +1,8 @@
 package edu.upenn.capsproject;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -235,30 +237,30 @@ public class GuidedActivity extends Activity {
 		} else {
 			// if not online look in the local file
 			// look in the default csv
-    		InputStream inputStream = getResources().openRawResource(R.raw.script);
-    		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-    		String line;
-    		while ((line = reader.readLine()) != null) {
-    			parseConversationStageFromLine(line);
-    		}
-    		reader.close();
-//			String FILENAME = "script.csv";
-//			FileInputStream fis = null;
-//			try {
-//				fis = openFileInput(FILENAME);
-//			} catch (FileNotFoundException e1) {
-//				e1.printStackTrace();
-//			}
-//			InputStreamReader isr = new InputStreamReader(fis);
-//			   BufferedReader bufferedReader = new BufferedReader(isr);
-//			   String line;
-//			   try {
-//				while ((line = bufferedReader.readLine()) != null) {
-//				       parseConversationStageFromLine(line);
-//				   }
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+    		
+			String FILENAME = "script.csv";
+			FileInputStream fis = null;
+			try {
+				fis = openFileInput(FILENAME);
+			} catch (FileNotFoundException e1) {
+			    InputStream inputStream = getResources().openRawResource(R.raw.script);
+	            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+	            String line;
+	            while ((line = reader.readLine()) != null) {
+	                parseConversationStageFromLine(line);
+	            }
+	            reader.close();
+			}
+			InputStreamReader isr = new InputStreamReader(fis);
+			   BufferedReader bufferedReader = new BufferedReader(isr);
+			   String line;
+			   try {
+				while ((line = bufferedReader.readLine()) != null) {
+				       parseConversationStageFromLine(line);
+				   }
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
