@@ -242,6 +242,16 @@ public class GuidedActivity extends Activity {
 			FileInputStream fis = null;
 			try {
 				fis = openFileInput(FILENAME);
+				InputStreamReader isr = new InputStreamReader(fis);
+	               BufferedReader bufferedReader = new BufferedReader(isr);
+	               String line;
+	               try {
+	                while ((line = bufferedReader.readLine()) != null) {
+	                       parseConversationStageFromLine(line);
+	                   }
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
 			} catch (FileNotFoundException e1) {
 			    InputStream inputStream = getResources().openRawResource(R.raw.script);
 	            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -250,16 +260,6 @@ public class GuidedActivity extends Activity {
 	                parseConversationStageFromLine(line);
 	            }
 	            reader.close();
-			}
-			InputStreamReader isr = new InputStreamReader(fis);
-			   BufferedReader bufferedReader = new BufferedReader(isr);
-			   String line;
-			   try {
-				while ((line = bufferedReader.readLine()) != null) {
-				       parseConversationStageFromLine(line);
-				   }
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 
