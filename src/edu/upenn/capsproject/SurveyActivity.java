@@ -1,10 +1,19 @@
 package edu.upenn.capsproject;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -369,9 +378,29 @@ public class SurveyActivity extends Activity {
         }
 
         try {
-            String to = "salbert@sas.upenn.edu";
-            new SendEmailWithSendGrid().execute(to);
-
+        	Thread thread = new Thread(new Runnable(){
+        	    @Override
+        	    public void run() {
+        	        try {
+        	        	// get the email from website
+        	        	HttpClient httpClient = new DefaultHttpClient();
+    		            HttpContext localContext = new BasicHttpContext();
+    		            String uri = "https://capsscriptfiles.s3.amazonaws.com/uploads/email.txt";
+    		            HttpGet httpGet = new HttpGet(uri);
+    		            HttpResponse response = httpClient.execute(httpGet, localContext);
+    		            BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+    		            String to = reader.readLine();
+    		            if (to == null){
+    		            	to = "eranm@upenn.edu";
+    		            }
+    		            new SendEmailWithSendGrid().execute(to);
+        	        } catch (Exception e) {
+        	            e.printStackTrace();
+        	        }
+        	    }
+        	});
+        	thread.start();
+        	thread.join();
         } catch (Exception e) {
             Log.d("onDestroy", "email failed");
             e.printStackTrace();

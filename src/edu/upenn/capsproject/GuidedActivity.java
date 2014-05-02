@@ -221,7 +221,6 @@ public class GuidedActivity extends Activity {
 	public void createConversationFromCsv() throws IOException, InterruptedException{
 		if (isOnline()){
 		Thread thread = new Thread(new Runnable(){
-		    @Override
 		    public void run() {
 		        try {
 		        	HttpClient httpClient = new DefaultHttpClient();
