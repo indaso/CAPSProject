@@ -1,10 +1,19 @@
 package edu.upenn.capsproject;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -22,8 +31,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 import com.github.sendgrid.SendGrid;
 
@@ -192,7 +201,6 @@ public class SurveyActivity extends Activity {
                     public void onProgressChanged(SeekBar seekBar,
                             int progress, boolean fromUser) {
                         aSupportRating = progress;
-                        String sSupport = String.valueOf(aSupportRating);
                     }
 
                     @Override
@@ -225,13 +233,10 @@ public class SurveyActivity extends Activity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,
                     boolean fromUser) {
-                String sFriend;
                 if (showBeforeViews) {
                     bFriendshipRating = progress;
-                    sFriend = String.valueOf(bFriendshipRating);
                 } else {
                     aFriendshipRating = progress;
-                    sFriend = String.valueOf(aFriendshipRating);
                 }
             }
 
@@ -253,6 +258,9 @@ public class SurveyActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+                dBefore = new Date();
+                sTimeBefore = DateFormat.format(mFormatString, dBefore).toString();
+
                 Intent i = new Intent(SurveyActivity.this, GuidedActivity.class);
                 i.putExtra(RECIPIENT_NAME, supportRecipient);
                 i.putExtra(PROVIDER_NAME, supportProvider);
@@ -291,65 +299,86 @@ public class SurveyActivity extends Activity {
             sTimeAfter = DateFormat.format(mFormatString, dAfter).toString();
         }
     }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        try {
-//            Logger.createLogger(new File(getFilesDir(), "data.csv"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Log.d("onDestroy", sTimeBefore);
-//        Log.d("onDestroy", sTimeAfter);
-//        String[] info1 = { supportRecipient, sTimeBefore, topicText,
-//                String.valueOf(bFeelRating), sTimeAfter,
-//                String.valueOf(aFeelRating), String.valueOf(bFriendshipRating),
-//                String.valueOf(aFriendshipRating) };
-//        ArrayList<String[]> s1 = new ArrayList<String[]>();
-//        s1.add(info1);
-//        try {
-//            Logger.getLogger().write(s1);
-//            Logger.getLogger().close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            String to = "salbert@sas.upenn.edu";
-//            new SendEmailWithSendGrid().execute(to);
-//
-//        } catch (Exception e) {
-//            Log.d("onDestroy", "email failed");
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private class SendEmailWithSendGrid extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//            SendGrid sendgrid = new SendGrid("app19013461@heroku.com",
-//                    "d1buyrvv");
-//            sendgrid.addTo(params[0]);
-//            sendgrid.setFrom(params[0]);
-//            sendgrid.setSubject("Conversation Data");
-//            sendgrid.setText("CSV File for conversation");
-//            try {
-//                sendgrid.addFile(new File(getFilesDir(), "data.csv"));
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//            String response = sendgrid.send();
-//            return response;
-//        }
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.survey, menu);
-//        return true;
-//    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            Logger.createLogger(new File(getFilesDir(), "data.csv"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.d("onDestroy", sTimeBefore);
+        Log.d("onDestroy", sTimeAfter);
+        String[] info1 = { supportRecipient, sTimeBefore, topicText,
+                String.valueOf(bFeelRating), sTimeAfter,
+                String.valueOf(aFeelRating), String.valueOf(bFriendshipRating),
+                String.valueOf(aFriendshipRating) };
+        ArrayList<String[]> s1 = new ArrayList<String[]>();
+        s1.add(info1);
+        try {
+            Logger.getLogger().write(s1);
+            Logger.getLogger().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+        	Thread thread = new Thread(new Runnable(){
+	        	@Override
+	        	public void run() {
+	        		try {
+	        			// get the email from website
+	        			HttpClient httpClient = new DefaultHttpClient();
+	        			HttpContext localContext = new BasicHttpContext();
+	        			String uri = "https://capsscriptfiles.s3.amazonaws.com/uploads/email.txt";
+	        			HttpGet httpGet = new HttpGet(uri);
+	        			HttpResponse response = httpClient.execute(httpGet, localContext);
+	        			BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+	        			String to = reader.readLine();
+	        			if (to == null){
+	        				to = "eranm@upenn.edu";
+	        			}
+	        			new SendEmailWithSendGrid().execute(to);
+	        		}
+	        		catch (Exception e) {
+	        			e.printStackTrace();
+	        		}
+				}
+        	});
+		thread.start();
+		thread.join();
+        } catch (Exception e) {
+            Log.d("onDestroy", "email failed");
+            e.printStackTrace();
+        }
+    }
+
+    private class SendEmailWithSendGrid extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            SendGrid sendgrid = new SendGrid("app19013461@heroku.com",
+                    "d1buyrvv");
+            sendgrid.addTo(params[0]);
+            sendgrid.setFrom(params[0]);
+            sendgrid.setSubject("Conversation Data");
+            sendgrid.setText("CSV File for conversation");
+            try {
+                sendgrid.addFile(new File(getFilesDir(), "data.csv"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            String response = sendgrid.send();
+            return response;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.survey, menu);
+        return true;
+    }
 }
+
