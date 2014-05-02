@@ -361,7 +361,7 @@ public class SurveyActivity extends Activity {
 	        			if (to == null){
 	        				to = "eranm@upenn.edu";
 	        			}
-	        			new SendEmailWithSendGrid().execute("albshu78@gmail.com");
+	        			new SendEmailWithSendGrid().execute(to);
 	        		}
 	        		catch (Exception e) {
 	        			e.printStackTrace();
