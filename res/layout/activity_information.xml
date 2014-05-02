@@ -13,20 +13,19 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/ask_name_giver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:text="Please enter the following information:" />
 
     <TextView
-        android:id="@+id/ask_name_giver"
+        android:id="@+id/ask_name_receiver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="What is the name of the person seeking support?" />
 
     <EditText
-        android:id="@+id/enter_giver_name"
+        android:id="@+id/enter_receiver_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -41,7 +40,7 @@
         android:id="@+id/ask_name_giver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="What is the name of the person providing support?" />
+        android:text="What is the name of the person giving support?" />
 
     <EditText
         android:id="@+id/enter_giver_name"

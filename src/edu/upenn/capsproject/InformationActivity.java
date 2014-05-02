@@ -24,51 +24,54 @@ public class InformationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
-//        mRecipientEText = (EditText) findViewById(R.id.enter_giver_name);
-//        mRecipientEText = (EditText) findViewById(R.id.enter_receiver_name);
-//
-//        mProviderEText.addTextChangedListener(new TextWatcher() {
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count,
-//                    int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before,
-//                    int count) {
-//                support_provider = s.toString();
-//            }
-//
-//        });
-//        
-//        mProviderEText.addTextChangedListener(new TextWatcher() {
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count,
-//                    int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before,
-//                    int count) {
-//                support_recipient = s.toString();
-//            }
-//
-//        });
+        mRecipientEText = (EditText) findViewById(R.id.enter_receiver_name);
+        mProviderEText = (EditText) findViewById(R.id.enter_giver_name);
+
+        mRecipientEText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                    int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                    int count) {
+                support_recipient = s.toString();
+            }
+
+        });
+
+        mProviderEText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                    int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                    int count) {
+                support_provider = s.toString();
+            }
+
+        });
+
     }
 
     // Continue to Pre-conversation Survey
     public void onNextButtonClick(View v) {
         Intent i = new Intent(this, SurveyActivity.class);
+        i.putExtra("supportRecipient", this.support_recipient);
+        i.putExtra("supportProvider", this.support_provider);
         startActivity(i);
     }
 
