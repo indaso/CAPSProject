@@ -30,6 +30,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -73,6 +74,7 @@ public class SurveyActivity extends Activity {
     protected TextView seekBarFeelView2;
     protected TextView seekBarFriendView;
     protected TextView seekBarSupportView;
+    protected LinearLayout seekBarSupportLabel;
 
     // TextView for Survey Type
     protected TextView surveyType;
@@ -158,6 +160,8 @@ public class SurveyActivity extends Activity {
         seekBarFeelView2
                 .setText("Very Bad                      Neutral                      Very Good");
 
+        seekBarFeelView2.setVisibility(View.GONE);
+        
         seekBarFeel = (SeekBar) findViewById(R.id.seekBar_feel);
         seekBarFeel.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
@@ -193,6 +197,10 @@ public class SurveyActivity extends Activity {
         seekBarSupportView
                 .setText("Very Bad                      Neutral                      Very Good");
 
+        seekBarSupportView.setVisibility(View.GONE);
+        
+        seekBarSupportLabel = (LinearLayout) findViewById(R.id.seekBar_support_label);
+        
         seekBarSupport = (SeekBar) findViewById(R.id.seekBar_support);
         seekBarSupport
                 .setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -216,6 +224,8 @@ public class SurveyActivity extends Activity {
         recipientSupport.setVisibility(View.GONE);
         seekBarSupportView.setVisibility(View.GONE);
         seekBarSupport.setVisibility(View.GONE);
+        
+        seekBarSupportLabel.setVisibility(View.GONE);
 
         // Friendship Seekbar
         recipientFriendship = (TextView) findViewById(R.id.recipient_friendship_question);
@@ -226,6 +236,7 @@ public class SurveyActivity extends Activity {
         seekBarFriendView = (TextView) findViewById(R.id.seekBar_friend_output);
         seekBarFriendView
                 .setText("Not Close                    Neutral                    Very Close");
+        seekBarFriendView.setVisibility(View.GONE);
 
         seekBarFriend = (SeekBar) findViewById(R.id.seekBar_friend);
         seekBarFriend.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -296,7 +307,7 @@ public class SurveyActivity extends Activity {
 
             recipientSupport.setVisibility(View.VISIBLE);
             seekBarSupport.setVisibility(View.VISIBLE);
-            seekBarSupportView.setVisibility(View.VISIBLE);
+            seekBarSupportLabel.setVisibility(View.VISIBLE);
             
             seekBarFeel.setProgress(50);
             seekBarFriend.setProgress(50);
