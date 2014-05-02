@@ -72,7 +72,12 @@ public class InformationActivity extends Activity {
         Intent i = new Intent(this, SurveyActivity.class);
         i.putExtra("supportRecipient", this.support_recipient);
         i.putExtra("supportProvider", this.support_provider);
-        startActivity(i);
+        startActivityForResult(i, 0);
+    }
+
+    @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    	finish();
     }
 
 }

@@ -190,7 +190,7 @@ public class SurveyActivity extends Activity {
         recipientSupport = (TextView) findViewById(R.id.recipient_support_question);
         recipientSupport
                 .setText("How good or bad was the support you received from "
-                        + supportRecipient + " during this conversation?\n"
+                        + supportProvider + " during this conversation?\n"
                         + "(Very Bad to Very Good)");
 
         seekBarSupportView = (TextView) findViewById(R.id.seekBar_support_output);
