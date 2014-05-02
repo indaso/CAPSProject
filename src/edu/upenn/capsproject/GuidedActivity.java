@@ -102,7 +102,7 @@ public class GuidedActivity extends Activity {
 
 		supportReceiverButton2 = (Button)findViewById(R.id.support_receiver_button2);
 		supportReceiverButton2.setRotation(180);
-		supportReceiverButton2.setVisibility(View.INVISIBLE);
+		supportReceiverButton2.setVisibility(View.GONE);
 
 		TextView supportReceiverName = (TextView) findViewById(R.id.support_receiver_name);
 		supportReceiverName.setRotation(180);
@@ -114,10 +114,10 @@ public class GuidedActivity extends Activity {
 
 		supportGiverButton1 = (Button)findViewById(R.id.support_giver_button1);
 		// hide button since there is no text
-		supportGiverButton1.setVisibility(View.INVISIBLE);
+		supportGiverButton1.setVisibility(View.GONE);
 
 		supportGiverButton2 = (Button)findViewById(R.id.support_giver_button2);
-		supportGiverButton2.setVisibility(View.INVISIBLE);
+		supportGiverButton2.setVisibility(View.GONE);
 
 		TextView supportGiverName = (TextView) findViewById(R.id.support_giver_name);
 		supportGiverName.setText(giverName);
@@ -323,25 +323,25 @@ public class GuidedActivity extends Activity {
 				supportReceiverButton1.setText(newStage.receiverButtonText1);
 				supportReceiverButton1.setVisibility(View.VISIBLE);
 			} else {
-				supportReceiverButton1.setVisibility(View.INVISIBLE);
+				supportReceiverButton1.setVisibility(View.GONE);
 			}
 			if(!newStage.receiverButtonText2.equals("")){
 				supportReceiverButton2.setText(newStage.receiverButtonText2);
 				supportReceiverButton2.setVisibility(View.VISIBLE);
 			} else {
-				supportReceiverButton2.setVisibility(View.INVISIBLE);
+				supportReceiverButton2.setVisibility(View.GONE);
 			}
 			if(!newStage.giverButtonText1.equals("")){
 				supportGiverButton1.setText(newStage.giverButtonText1);
 				supportGiverButton1.setVisibility(View.VISIBLE);
 			} else {
-				supportGiverButton1.setVisibility(View.INVISIBLE);
+				supportGiverButton1.setVisibility(View.GONE);
 			}
 			if(!newStage.giverButtonText2.equals("")){
 				supportGiverButton2.setText(newStage.giverButtonText2);
 				supportGiverButton2.setVisibility(View.VISIBLE);
 			} else {
-				supportGiverButton2.setVisibility(View.INVISIBLE);
+				supportGiverButton2.setVisibility(View.GONE);
 			}
 	}
 
