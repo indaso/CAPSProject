@@ -12,7 +12,7 @@
 12,Listen.,,,,,Ask [support recipient] if it's okay for you to share your advice/opinion/story. What did [support recipient] say?,Yes,14,No,13
 13,,,,,,Would you like to offer reassurance or let [support recipient] know that you care?,Yes,19,No,22
 14,Listen.,,,,,"Say ""I realize I don't know everything about your situation so tell me if what I say makes no sense to you.""",Done,15,,
-15,Listen.,,,,,Share your advice / opinion / story.,Done,14,,
+15,Listen.,,,,,Share your advice / opinion / story.,Done,16,,
 16,How helpful is what [support provider] said?,Helpful,17,Not Helpful,18,,,,,
 17,Explain to [support recipient] why you feel this way.,Done,11,,,Listen.,,,,
 18,Explain to [support recipient] why you feel this way.,Done,4,,,Listen.,,,,

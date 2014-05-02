@@ -26,14 +26,6 @@
         android:layout_marginTop="70dp"
         android:text="@string/start_button" />
 
-    <Button
-        android:id="@+id/quit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="onQuitButtonClick"
-        android:text="Quit" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

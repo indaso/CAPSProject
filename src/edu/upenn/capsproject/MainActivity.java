@@ -33,10 +33,15 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent i = new Intent(MainActivity.this, InformationActivity.class);
-				startActivity(i);
+				startActivityForResult(i, 0);
 			}
 		});
 	}
+
+    @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    	finish();
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,11 +49,10 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	// Quit game
-    public void onQuitButtonClick(View v) {
-        finish();
-        System.exit(0);
-    }
+
+//	// Quit game
+//    public void onQuitButtonClick(View v) {
+//        finish();
+//    }
 
 }
