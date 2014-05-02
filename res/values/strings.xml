@@ -15,6 +15,7 @@
     <string name="giver_name_hint">Enter Support Giver\'s Name.</string>
     <string name="receiver_name_hint">Enter Support Receiver\'s Name.</string>
     <string name="start_conversation">Begin Conversation</string>
+    <string name="title_activity_information">InformationActivity</string>
     
 
 </resources>
