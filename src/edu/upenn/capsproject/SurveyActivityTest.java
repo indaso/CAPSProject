@@ -3,11 +3,11 @@ package edu.upenn.capsproject;
 import junit.framework.TestCase;
 
 public class SurveyActivityTest extends TestCase {
-	OldSurveyActivity s;
+	SurveyActivity s;
 	protected void setUp() throws Exception {
 		super.setUp();
 		
-		s = new OldSurveyActivity();
+		s = new SurveyActivity();
 	}
 	
 	

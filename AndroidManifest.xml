@@ -28,16 +28,12 @@
             android:label="@string/title_activity_guided" >
         </activity>
         <activity
-            android:name="edu.upenn.capsproject.OldSurveyActivity"
+            android:name="edu.upenn.capsproject.SurveyActivity"
             android:label="@string/title_activity_survey" >
         </activity>
         <activity
             android:name="edu.upenn.capsproject.InformationActivity"
             android:label="@string/title_activity_information" >
-        </activity>
-        <activity
-            android:name="edu.upenn.capsproject.SurveyActivity"
-            android:label="SurveyActivity" >
         </activity>
     </application>
 
