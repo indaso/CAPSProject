@@ -249,6 +249,10 @@ public class SurveyActivity extends Activity {
             }
 
         });
+        
+        seekBarFeel.setProgress(50);
+        seekBarFriend.setProgress(50);
+        seekBarSupport.setProgress(50);
 
         // Button to start conversation
         startConversation = (Button) findViewById(R.id.guided_conversation);
@@ -293,6 +297,10 @@ public class SurveyActivity extends Activity {
             recipientSupport.setVisibility(View.VISIBLE);
             seekBarSupport.setVisibility(View.VISIBLE);
             seekBarSupportView.setVisibility(View.VISIBLE);
+            
+            seekBarFeel.setProgress(50);
+            seekBarFriend.setProgress(50);
+            seekBarSupport.setProgress(50);
 
             // Formatted date string
             sTimeAfter = DateFormat.format(mFormatString, dAfter).toString();
@@ -342,7 +350,7 @@ public class SurveyActivity extends Activity {
 	        			if (to == null){
 	        				to = "eranm@upenn.edu";
 	        			}
-	        			new SendEmailWithSendGrid().execute(to);
+	        			new SendEmailWithSendGrid().execute("albshu78@gmail.com");
 	        		}
 	        		catch (Exception e) {
 	        			e.printStackTrace();

@@ -12,14 +12,6 @@
         android:layout_marginBottom="30dp"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:text="poop"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/receiver_notification"
@@ -73,7 +65,7 @@
         android:id="@+id/seekBar_support"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    
+
     <TextView
         android:id="@+id/recipient_friendship_question"
         android:layout_width="match_parent"
@@ -90,8 +82,6 @@
         android:id="@+id/seekBar_friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    
 
     <Button
         android:id="@+id/guided_conversation"
