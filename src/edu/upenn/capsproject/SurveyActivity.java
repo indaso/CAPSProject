@@ -350,8 +350,8 @@ public class SurveyActivity extends Activity {
 	        		}
 				}
         	});
-		thread.start();
-		thread.join();
+        	thread.start();
+			thread.join();
         } catch (Exception e) {
             Log.d("onDestroy", "email failed");
             e.printStackTrace();
