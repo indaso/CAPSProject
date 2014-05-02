@@ -94,25 +94,6 @@ public class GuidedActivity extends Activity {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		String FILENAME = "script.csv";
-
-		FileInputStream fis = null;
-		try {
-			fis = openFileInput(FILENAME);
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		InputStreamReader isr = new InputStreamReader(fis);
-		   BufferedReader bufferedReader = new BufferedReader(isr);
-		   String line;
-		   try {
-			while ((line = bufferedReader.readLine()) != null) {
-			       System.out.println("reading from file... " + line);
-			   }
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guided);
@@ -220,56 +201,62 @@ public class GuidedActivity extends Activity {
 	// create the conversation stages from the csv 
 	public void createConversationFromCsv() throws IOException, InterruptedException{
 		if (isOnline()){
-		Thread thread = new Thread(new Runnable(){
-		    @Override
-		    public void run() {
-		        try {
-		        	HttpClient httpClient = new DefaultHttpClient();
-		            HttpContext localContext = new BasicHttpContext();
-		            String uri = "https://capsscriptfiles.s3.amazonaws.com/uploads/script.csv";
-		            HttpGet httpGet = new HttpGet(uri);
-		            HttpResponse response = httpClient.execute(httpGet, localContext);
-//		    		InputStream inputStream = getResources().openRawResource(R.raw.script);
-		    		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-		    		String line;
-		    		
-		    		// write to internal storage 
-		    		String FILENAME = "script.csv";
-		    		String stringToWrite = "";
-		    		deleteFile(FILENAME);
-		    		FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-		    		while ((line = reader.readLine()) != null) {
-		    			parseConversationStageFromLine(line);
-		    			stringToWrite = line + "\n";
-			    		fos.write(stringToWrite.getBytes());
-		    		}
-		    		fos.close();
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        }
-		    }
-		});
-		thread.start();
-		thread.join();
+			Thread thread = new Thread(new Runnable(){
+			    public void run() {
+			        try {
+			        	HttpClient httpClient = new DefaultHttpClient();
+			            HttpContext localContext = new BasicHttpContext();
+			            String uri = "https://capsscriptfiles.s3.amazonaws.com/uploads/script.csv";
+			            HttpGet httpGet = new HttpGet(uri);
+			            HttpResponse response = httpClient.execute(httpGet, localContext);
+			    		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+			    		String line;
+			    		
+			    		// write to internal storage 
+			    		String FILENAME = "script.csv";
+			    		String stringToWrite = "";
+			    		deleteFile(FILENAME);
+			    		FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+			    		while ((line = reader.readLine()) != null) {
+			    			parseConversationStageFromLine(line);
+			    			stringToWrite = line + "\n";
+				    		fos.write(stringToWrite.getBytes());
+			    		}
+			    		fos.close();
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+			    }
+			});
+			thread.start();
+			thread.join();
 		} else {
 			// if not online look in the local file
-			String FILENAME = "script.csv";
-			FileInputStream fis = null;
-			try {
-				fis = openFileInput(FILENAME);
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
-			InputStreamReader isr = new InputStreamReader(fis);
-			   BufferedReader bufferedReader = new BufferedReader(isr);
-			   String line;
-			   try {
-				while ((line = bufferedReader.readLine()) != null) {
-				       parseConversationStageFromLine(line);
-				   }
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			// look in the default csv 
+    		InputStream inputStream = getResources().openRawResource(R.raw.script);
+    		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+    		String line;
+    		while ((line = reader.readLine()) != null) {
+    			parseConversationStageFromLine(line);
+    		}
+    		reader.close();
+//			String FILENAME = "script.csv";
+//			FileInputStream fis = null;
+//			try {
+//				fis = openFileInput(FILENAME);
+//			} catch (FileNotFoundException e1) {
+//				e1.printStackTrace();
+//			}
+//			InputStreamReader isr = new InputStreamReader(fis);
+//			   BufferedReader bufferedReader = new BufferedReader(isr);
+//			   String line;
+//			   try {
+//				while ((line = bufferedReader.readLine()) != null) {
+//				       parseConversationStageFromLine(line);
+//				   }
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 		}
 		
 	}
