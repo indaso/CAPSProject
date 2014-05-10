@@ -2,8 +2,11 @@ package edu.upenn.capsproject;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +21,10 @@ import org.apache.http.protocol.HttpContext;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -358,8 +364,31 @@ public class SurveyActivity extends Activity {
 	        			HttpResponse response = httpClient.execute(httpGet, localContext);
 	        			BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 	        			String to = reader.readLine();
-	        			if (to == null){
-	        				to = "eranm@upenn.edu";
+	        			if (to == null || response == null){
+	        				// try reading from internal memory
+	        				String FILENAME = "email.txt";
+	        				FileInputStream fis = null;
+	        				try {
+	        					fis = openFileInput(FILENAME);
+	        					InputStreamReader isr = new InputStreamReader(fis);
+	        		            BufferedReader bufferedReader = new BufferedReader(isr);
+	        		            try {
+	        		            	to = bufferedReader.readLine();
+	        		            } catch (IOException e) {
+	        		                e.printStackTrace();
+	        		            }
+	        		            bufferedReader.close();
+	        				} catch (FileNotFoundException e1) {
+	        					// if nothing in internal memory then default to eran's email
+		        				to = "eranm@upenn.edu";
+	        				}
+	        			} else {
+	        				// add to internal memory
+	        				String FILENAME = "email.txt";
+				    		deleteFile(FILENAME);
+				    		FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+					    	fos.write(to.getBytes());
+				    		fos.close();
 	        			}
 	        			new SendEmailWithSendGrid().execute(to);
 	        		}
@@ -402,5 +431,15 @@ public class SurveyActivity extends Activity {
         getMenuInflater().inflate(R.menu.survey, menu);
         return true;
     }
+    
+    public boolean isOnline() {
+	    ConnectivityManager cm =
+	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+	        return true;
+	    }
+	    return false;
+	}
 }
 
