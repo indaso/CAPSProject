@@ -80,4 +80,11 @@ public class InformationActivity extends Activity {
     	finish();
     }
 
+    public String getSupportRecipient(){
+    	return support_recipient;
+    }
+    public String getSupportProvider(){
+    	return support_provider;
+    }
+
 }

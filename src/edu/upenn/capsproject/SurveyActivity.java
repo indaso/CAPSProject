@@ -102,7 +102,7 @@ public class SurveyActivity extends Activity {
      * Variable on whether to show various buttons and views. When false, some
      * views in this activity will not be shown for the Post Survey.
      */
-    protected static boolean showBeforeViews = true;
+    protected boolean showBeforeViews = true;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -161,7 +161,7 @@ public class SurveyActivity extends Activity {
                 .setText("Very Bad                      Neutral                      Very Good");
 
         seekBarFeelView2.setVisibility(View.GONE);
-        
+
         seekBarFeel = (SeekBar) findViewById(R.id.seekBar_feel);
         seekBarFeel.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
@@ -198,9 +198,9 @@ public class SurveyActivity extends Activity {
                 .setText("Very Bad                      Neutral                      Very Good");
 
         seekBarSupportView.setVisibility(View.GONE);
-        
+
         seekBarSupportLabel = (LinearLayout) findViewById(R.id.seekBar_support_label);
-        
+
         seekBarSupport = (SeekBar) findViewById(R.id.seekBar_support);
         seekBarSupport
                 .setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -224,7 +224,7 @@ public class SurveyActivity extends Activity {
         recipientSupport.setVisibility(View.GONE);
         seekBarSupportView.setVisibility(View.GONE);
         seekBarSupport.setVisibility(View.GONE);
-        
+
         seekBarSupportLabel.setVisibility(View.GONE);
 
         // Friendship Seekbar
@@ -260,7 +260,7 @@ public class SurveyActivity extends Activity {
             }
 
         });
-        
+
         seekBarFeel.setProgress(50);
         seekBarFriend.setProgress(50);
         seekBarSupport.setProgress(50);
@@ -308,7 +308,7 @@ public class SurveyActivity extends Activity {
             recipientSupport.setVisibility(View.VISIBLE);
             seekBarSupport.setVisibility(View.VISIBLE);
             seekBarSupportLabel.setVisibility(View.VISIBLE);
-            
+
             seekBarFeel.setProgress(50);
             seekBarFriend.setProgress(50);
             seekBarSupport.setProgress(50);
@@ -326,8 +326,8 @@ public class SurveyActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d("onDestroy", sTimeBefore);
-        Log.d("onDestroy", sTimeAfter);
+        //Log.d("onDestroy", sTimeBefore);
+        //Log.d("onDestroy", sTimeAfter);
         String[] headers = { "Recipient", "Topic", "Start Time", "End Time",
                 "Feeling Before", "Friendship Before",
                 "Feeling After", "Friendship After", "Support Rating"};
@@ -402,5 +402,33 @@ public class SurveyActivity extends Activity {
         getMenuInflater().inflate(R.menu.survey, menu);
         return true;
     }
+
+    public void setShowBeforeViews(boolean b){
+    	showBeforeViews = b;
+    }
+
+	public String getTopicText() {
+		return topicText;
+	}
+
+	public int getbFeelRating() {
+		return bFeelRating;
+	}
+
+	public int getbFriendshipRating() {
+		return bFriendshipRating;
+	}
+
+	public int getaFeelRating() {
+		return aFeelRating;
+	}
+
+	public int getaFriendshipRating() {
+		return aFriendshipRating;
+	}
+
+	public int getaSupportRating() {
+		return aSupportRating;
+	}
 }
 

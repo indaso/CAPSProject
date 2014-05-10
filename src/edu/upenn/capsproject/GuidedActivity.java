@@ -50,17 +50,17 @@ public class GuidedActivity extends Activity {
 	public static final String GUIDED_FINISHED = "edu.upenn.capsproject.guided_finished";
 
 	// datatype to hold prompts, button texts, and what the next stage should be
-	class conversationStage{
-		String receiverPrompt;
-		String giverPrompt;
-		String receiverButtonText1;
-		String receiverButtonText2;
-		String giverButtonText1;
-		String giverButtonText2;
-		int receiverButton1NextStage;
-		int receiverButton2NextStage;
-		int giverButton1NextStage;
-		int giverButton2NextStage;
+	public class conversationStage{
+		public String receiverPrompt;
+		public String giverPrompt;
+		public String receiverButtonText1;
+		public String receiverButtonText2;
+		public String giverButtonText1;
+		public String giverButtonText2;
+		public int receiverButton1NextStage;
+		public int receiverButton2NextStage;
+		public int giverButton1NextStage;
+		public int giverButton2NextStage;
 
 		public conversationStage(String receiverPrompt, String giverPrompt, String
 									receiverButtonText1, int receiverButton1NextStage,
@@ -237,7 +237,7 @@ public class GuidedActivity extends Activity {
 		} else {
 			// if not online look in the local file
 			// look in the default csv
-    		
+
 			String FILENAME = "script.csv";
 			FileInputStream fis = null;
 			try {
@@ -363,5 +363,17 @@ public class GuidedActivity extends Activity {
 		getMenuInflater().inflate(R.menu.guided, menu);
 		return true;
 	}
+
+	public HashMap<Integer, GuidedActivity.conversationStage> getPrompts(){
+		return prompts;
+	}
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public void setGiverName(String giverName) {
+		this.giverName = giverName;
+	}
+
 
 }
